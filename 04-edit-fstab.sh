@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 
+source .env
+
 echo "================"
 echo "04-edit-fstab.sh"
 echo "================"

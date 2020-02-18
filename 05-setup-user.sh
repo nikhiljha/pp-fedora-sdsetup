@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 
+source .env
+
 echo "================"
 echo "05-setup-user.sh"
 echo "================"

@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e
 
+source .env
+
 echo "===================="
 echo "02-install-rootfs.sh"
 echo "===================="
