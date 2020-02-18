@@ -38,7 +38,7 @@ then
     mount $PP_PARTB rootfs
 
     infecho "Fixing /etc/fstab..."
-    # TODO: Edit the /etc/fstab with the proper entries.
+    cat files/fstab > rootfs/etc/fstab
 
     infecho "Unmounting root file system..."
     umount $PP_PARTB
