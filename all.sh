@@ -1,3 +1,6 @@
+#!/bin/bash
+set -e
+
 echo "This script will NOT download the files."
 echo "Do it yourself: sh 00-download-files.sh"
 sh 00-selftest.sh
