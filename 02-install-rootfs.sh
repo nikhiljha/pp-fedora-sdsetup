@@ -48,11 +48,11 @@ then
 
     infecho "Mounting Fedora image..."
     losetup /dev/loop0 $FEDORA_RAW_FILE
-    partprobe -S /dev/loop0
+    partprobe -s /dev/loop0
     mount /dev/loop0p3 imgfs
 
     infecho "Mounting SD Card rootfs..."
-    partprobe -S $PP_SD_DEVICE
+    partprobe -s $PP_SD_DEVICE
     mount $PP_PARTB rootfs
 
     infecho "Copying files..."
@@ -60,6 +60,7 @@ then
 
     infecho "Unmounting everything..."
     umount /dev/loop0p3
+    losetup -d /dev/loop0
     umount $PP_PARTB
 
     infecho "Deleting temp directories..."

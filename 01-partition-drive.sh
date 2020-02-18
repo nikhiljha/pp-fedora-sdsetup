@@ -49,6 +49,7 @@ unit: sectors
 EOF
     infecho "Device partitioned!"
 
+    infecho "If you change the defaults on either of these two questions, be sure to change them in .env before this script exits."
     infecho "Please use lsblk and tell me what the SMALLER partition is called..."
     read -p "Boot Partition? [${PP_PARTA}] " -r
     if [ ! -z "$REPLY" ]
