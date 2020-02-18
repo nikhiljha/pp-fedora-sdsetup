@@ -58,7 +58,7 @@ then
     mount $PP_PARTB rootfs
 
     infecho "Copying files..."
-    rsync -a --progress imgfs/* rootfs/*
+    rsync -a --progress imgfs/* rootfs/
 
     infecho "Unmounting everything..."
     umount /dev/loop0p3
