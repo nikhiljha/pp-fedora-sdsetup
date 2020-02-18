@@ -42,7 +42,7 @@ then
     cp phone-scripts/* rootfs/root
 
     infecho "Chrooting with qemu into rootfs..."
-    chroot rootfs qemu-aarch64-static /bin/bash all.sh
+    chroot rootfs qemu-aarch64-static /bin/bash /root/all.sh
     
     infecho "Unmounting rootfs..."
     sleep 3

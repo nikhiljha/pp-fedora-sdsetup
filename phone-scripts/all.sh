@@ -1,4 +1,4 @@
 #!/bin/bash
 set -e
 
-bash 01-create-sudo-user.sh
+bash /root/01-create-sudo-user.sh
