@@ -41,6 +41,7 @@ then
     cat files/fstab > rootfs/etc/fstab
 
     infecho "Unmounting root file system..."
+    sleep 3
     umount $PP_PARTB
     rmdir rootfs
 fi
