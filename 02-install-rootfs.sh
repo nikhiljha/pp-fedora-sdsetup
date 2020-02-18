@@ -17,21 +17,10 @@ errecho () {
 # Ask for env vars...
 infecho "The env vars that will be used in this script..."
 infecho "PP_SD_DEVICE = $PP_SD_DEVICE"
-PP_PARTB = ${PP_SD_DEVICE}2
-read -p "Root Partition? [${PP_PARTB}] " -r
-if [ ! -z "$REPLY" ]
-then
-    PP_PARTB=$REPLY
-fi
-read -p "Fedora extracted rootFS image? (.raw) [] " -r
-# TODO: Autodetect the rootFS path if it's in the same directory.
-# Perhaps by suggesting it if there's a file ending in .raw.
-if [ ! -z "$REPLY" ]
-then
-    FEDORA_RAW=$REPLY
-else
-    errecho "You must tell me where your extracted Fedora raw image is downloaded."
-fi
+infecho "PP_PARTA = $PP_PARTA"
+infecho "PP_PARTB = $PP_PARTB"
+infecho "FEDORA_RAW_FILE = $FEDORA_RAW_FILE"
+echo
 
 # Automatic Preflight Checks
 if [[ $EUID -ne 0 ]]; then
@@ -39,13 +28,10 @@ if [[ $EUID -ne 0 ]]; then
     exit 1
 fi
 
-# TODO: Mount raw image.
-# TODO: Mount pinephone FS.
-# TODO: Detect and store third partition of raw image.
-
 # Warning
 echo "=== WARNING WARNING WARNING ==="
 infecho "This script WILL COPY A TON OF FILES TO $PP_PARTB (mounted to $PP_ROOT_DIR)."
+infecho "It will also dry to mount to /dev/loop0. Make sure nothing else is there."
 infecho "Also, I didn't test this so it might also cause WWIII or something."
 infecho "I'm not responsible for anything that happens, you should read the script first."
 echo "=== WARNING WARNING WARNING ==="
@@ -54,7 +40,27 @@ read -p "Continue? [y/N] " -n 1 -r
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
-    # rsync -ah --progress SOURCE DESTINATION
+    infecho "Making mount directories..."
+    mkdir -p imgfs
+    mkdir -p rootfs
+
+    infecho "Mounting Fedora image..."
+    losetup /dev/loop0 $FEDORA_RAW_FILE
+    mount /dev/loop0p3 imgfs
+
+    infecho "Mounting SD Card rootfs..."
+    mount $PP_PARTB rootfs
+
+    infecho "Copying files..."
+    rsync -a --progress imgfs/* rootfs/*
+
+    infecho "Unmounting everything..."
+    umount /dev/loop0p3
+    umount $PP_PARTB
+
+    infecho "Deleting temp directories..."
+    rmdir imgfs
+    rmdir rootfs
 fi
 
 infecho "If there are no errors above, the script was probably successful!"

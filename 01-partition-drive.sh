@@ -16,8 +16,9 @@ errecho () {
 # Notify User
 infecho "The env vars that will be used in this script..."
 infecho "PP_SD_DEVICE = $PP_SD_DEVICE"
-PP_PARTA = ${PP_SD_DEVICE}1
-PP_PARTB = ${PP_SD_DEVICE}2
+infecho "PP_PARTA = $PP_PARTA"
+infecho "PP_PARTB = $PP_PARTB"
+echo
 
 # Automatic Preflight Checks
 if [[ $EUID -ne 0 ]]; then
