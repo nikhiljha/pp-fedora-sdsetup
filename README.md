@@ -14,7 +14,11 @@ A collection of scripts that correctly sets up Fedora to run off your PinePhone 
 ## Usage
 
 0. Use bash. `fish` and other weird shells are unsupported.
-1. Edit `.env`, and run `bash env.sh`.
+1. Edit `.env` with your own variables.
 2. Ensure that all of your SD card partitions are unmounted, but visible in `lsblk`.
-3. Run `00-download-files.sh` then `all.sh`, verify the information presented whenever it asks you to confirm.
-4. If there are prompts, answer them. If there are errors, you can restart from the step that it failed on after fixing the errors by running the script directly.
+3. Run `bash 00-download-files.sh` then `sudo bash all.sh`, verify the information presented whenever it asks you to confirm.
+
+## Tips
+
+- Run all scripts other than 00-download-files.sh as root, and from this (README.md) directory! Do not directly run anything in the phone-scripts folder!
+- If a script fails midway through, some things may still be mounted. `cleanup.sh` will attempt to unmount everything. Once again, run it as root!
