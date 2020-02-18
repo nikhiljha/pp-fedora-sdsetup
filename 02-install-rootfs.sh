@@ -30,7 +30,7 @@ fi
 
 # Warning
 echo "=== WARNING WARNING WARNING ==="
-infecho "This script WILL COPY A TON OF FILES TO $PP_PARTB (mounted to $PP_ROOT_DIR)."
+infecho "This script WILL COPY A TON OF FILES TO $PP_PARTB."
 infecho "It will also dry to mount to /dev/loop0. Make sure nothing else is there."
 infecho "Also, I didn't test this so it might also cause WWIII or something."
 infecho "I'm not responsible for anything that happens, you should read the script first."
