@@ -12,4 +12,5 @@ infecho () {
 
 infecho "Adding user \"pine\"..."
 adduser pine
+passwd pine
 usermod -aG wheel pine
