@@ -14,7 +14,7 @@ A collection of scripts that correctly sets up Fedora to run off your PinePhone 
 ## Usage
 
 0. Use bash. `fish` and other weird shells are unsupported.
-1. Edit `.env`, and run `source .env`.
+1. Edit `.env`, and run `bash env.sh`.
 2. Ensure that all of your SD card partitions are unmounted, but visible in `lsblk`.
-3. Run `00-download-files.sh` then `all.sh`.
+3. Run `00-download-files.sh` then `all.sh`, verify the information presented whenever it asks you to confirm.
 4. If there are prompts, answer them. If there are errors, you can restart from the step that it failed on after fixing the errors by running the script directly.
