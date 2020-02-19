@@ -1,4 +1,4 @@
-**WARNING!** This is a *barely tested* collection of scripts written by someone who has never written a bash script for other people to use! It involves the *dd* command and *sudo*. This is **VERY DANGEROUS** - please do not run it unless you have read and fully understood what it will do. Better yet, read the scripts to learn how to do things yourself. In either case, I'm not responsible for anything that you do with this code.
+**WARNING!** This is a *barely tested* collection of scripts written by someone who has never written a bash script for other people to use! It involves the *dd* command and *sudo*. This is **VERY DANGEROUS** - please do not run it unless you have read and fully understood what it will do. Better yet, read the scripts to learn how to do things yourself. In any case, I'm not responsible for anything that you do with this code.
 
 # sdsetup
 
