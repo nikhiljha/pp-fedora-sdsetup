@@ -57,7 +57,7 @@ then
     cp board.itb bootfs/
 
     infecho "Installing kernel modules..."
-    rsync -a --progress modules/lib/modules/* ../rootfs/lib/modules/
+    rsync -a --progress modules/lib/modules/* rootfs/lib/modules/
 
     infecho "Unmounting SD card partitions..."
     umount $PP_PARTA
