@@ -15,6 +15,6 @@ then
     tar xf pp.tar.gz
 
     # Download fedora
-    wget https://dl.fedoraproject.org/pub/fedora-secondary/development/rawhide/Workstation/aarch64/images/Fedora-Workstation-Rawhide-20200218.n.0.aarch64.raw.xz -O rawhide.raw.xz
+    wget https://dl.fedoraproject.org/pub/fedora-secondary/development/rawhide/Spins/aarch64/images/Fedora-Minimal-Rawhide-20200220.n.1.aarch64.raw.xz -O rawhide.raw.xz
     xz --decompress rawhide.raw.xz
 fi
