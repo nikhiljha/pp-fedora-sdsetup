@@ -47,7 +47,7 @@ then
     mkdir -p rootfs
 
     infecho "Mounting Fedora image..."
-    losetup /dev/loop0 $FEDORA_RAW_FILE
+    losetup /dev/loop0 rawhide.raw
     partprobe -s /dev/loop0
     mount /dev/loop0p3 imgfs
 
