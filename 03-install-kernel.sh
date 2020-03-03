@@ -46,6 +46,9 @@ then
     infecho "Writing bootloader..."
     dd if=uboot.bin of=$PP_SD_DEVICE bs=1024 seek=8
 
+    infecho "Changing directory back..."
+    cd ../
+
     infecho "Mounting SD card partitions..."
     mkdir -p bootfs
     mkdir -p rootfs
@@ -53,11 +56,11 @@ then
     mount $PP_PARTB rootfs
 
     infecho "Copying boot.scr board.itb..."
-    cp boot.scr bootfs/
-    cp board.itb bootfs/
+    cp pp-5.6/boot.scr bootfs/
+    cp pp-5.6/board.itb bootfs/
 
     infecho "Installing kernel modules..."
-    rsync -a --progress modules/lib/modules/* rootfs/lib/modules/
+    rsync -a --progress pp-5.6/modules/lib/modules/* rootfs/lib/modules/
 
     infecho "Unmounting SD card partitions..."
     umount $PP_PARTA

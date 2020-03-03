@@ -18,9 +18,6 @@ errecho () {
 
 # Ask for env vars...
 infecho "The env vars that will be used in this script..."
-infecho "PP_SD_DEVICE = $PP_SD_DEVICE"
-infecho "PP_PARTA = $PP_PARTA"
-infecho "PP_PARTB = $PP_PARTB"
 infecho "FEDORA_RAW_FILE = $FEDORA_RAW_FILE"
 echo
 
@@ -32,10 +29,8 @@ fi
 
 # Warning
 echo "=== WARNING WARNING WARNING ==="
-infecho "This script WILL COPY A TON OF FILES TO $PP_PARTB."
-infecho "It will also try to mount to /dev/loop0. Make sure nothing else is there."
-infecho "Also, I didn't test this so it might also cause WWIII or something."
-infecho "I'm not responsible for anything that happens, you should read the script first."
+infecho "This script will try to mount to /dev/loop0."
+infecho "Make sure nothing else is there with: lsblk"
 echo "=== WARNING WARNING WARNING ==="
 echo
 read -p "Continue? [y/N] " -n 1 -r
@@ -53,7 +48,6 @@ then
 
     infecho "Mounting SD Card rootfs..."
     partprobe -s $PP_SD_DEVICE
-    # blockdev --rereadpt $PP_SD_DEVICE
     sleep 1 # Sometimes it lags.
     mount $PP_PARTB rootfs
 

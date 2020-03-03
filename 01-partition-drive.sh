@@ -15,13 +15,6 @@ errecho () {
     echo $1 1>&2
 }
 
-# Notify User
-infecho "The env vars that will be used in this script..."
-infecho "PP_SD_DEVICE = $PP_SD_DEVICE"
-infecho "PP_PARTA = $PP_PARTA"
-infecho "PP_PARTB = $PP_PARTB"
-echo
-
 # Automatic Preflight Checks
 if [[ $EUID -ne 0 ]]; then
     errecho "This script must be run as root!" 
@@ -30,38 +23,27 @@ fi
 
 # Warning
 echo "=== WARNING WARNING WARNING ==="
-infecho "This script WILL ERASE ALL DATA on $PP_SD_DEVICE."
-infecho "Also, I didn't test this so it might also cause WWIII or something."
-infecho "I'm not responsible for anything that happens, you should read the script first."
+infecho "This script will mount to /dev/loop1."
+infecho "Make sure nothing else is mounted there: lsblk"
 echo "=== WARNING WARNING WARNING ==="
 echo
 read -p "Continue? [y/N] " -n 1 -r
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
-    infecho "Begining drive partition..."
-    sfdisk $PP_SD_DEVICE <<EOF
+    infecho "Begining image partition..."
+    sfdisk $OUT_NAME <<EOF
 label: dos
 unit: sectors
 
 4MiB,252MiB,
 256MiB,,
 EOF
-    infecho "Device partitioned!"
+    infecho "Image partitioned!"
 
-    infecho "If you change the defaults on either of these two questions, be sure to change them in .env before this script exits."
-    infecho "Please use lsblk and tell me what the SMALLER partition is called..."
-    read -p "Boot Partition? [${PP_PARTA}] " -r
-    if [ ! -z "$REPLY" ]
-    then
-        PP_PARTA=$REPLY
-    fi
-    infecho "Please use lsblk and tell me what the LARGER partition is called..."
-    read -p "Root Partition? [${PP_PARTB}] " -r
-    if [ ! -z "$REPLY" ]
-    then
-        PP_PARTB=$REPLY
-    fi
+    infecho "Mounting the image to loop1..."
+    losetup /dev/loop1 fedora.img
+    partprobe -s /dev/loop1
 
     infecho "Beginning filesystem creation..."
     infecho "If this fails, you might need to install mkfs.f2fs, which is usually called f2fs-tools."
