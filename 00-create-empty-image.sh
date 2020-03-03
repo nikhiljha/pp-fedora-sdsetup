@@ -14,5 +14,5 @@ echo
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
     echo "Creating blank 3GB file called $OUT_NAME."
-    dd if=/dev/zero of=$OUT_NAME iflag=fullblock bs=1M count=3000 && sync
+    dd if=/dev/zero of=$OUT_NAME iflag=fullblock bs=1M count=3400 && sync
 fi
