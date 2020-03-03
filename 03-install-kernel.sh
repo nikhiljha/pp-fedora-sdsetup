@@ -14,7 +14,7 @@ infecho () {
 
 # Notify User
 infecho "The env vars that will be used in this script..."
-infecho "PP_SD_DEVICE = $PP_SD_DEVICE"
+infecho "PP_SD_DEVICE = $PP_IMAGE"
 infecho "PP_PARTA = $PP_PARTA"
 infecho "PP_PARTB = $PP_PARTB"
 echo
@@ -44,7 +44,7 @@ then
     mkimage -A arm64 -T script -C none -d boot.cmd boot.scr
 
     infecho "Writing bootloader..."
-    dd if=uboot.bin of=$PP_SD_DEVICE bs=1024 seek=8
+    dd if=uboot.bin of=$PP_IMAGE bs=1024 seek=8
 
     infecho "Changing directory back..."
     cd ../

@@ -47,7 +47,7 @@ then
     mount /dev/loop0p3 imgfs
 
     infecho "Mounting SD Card rootfs..."
-    partprobe -s $PP_SD_DEVICE
+    partprobe -s $PP_IMAGE
     sleep 1 # Sometimes it lags.
     mount $PP_PARTB rootfs
 
