@@ -41,9 +41,17 @@ then
     cp /usr/bin/qemu-aarch64-static rootfs/usr/bin
     cp phone-scripts/* rootfs/root
 
+    infecho "Mounting your /dev into the rootfs..."
+    infecho "This is neccesary for dnf to work, because reasons."
+    mount --bind /dev rootfs/dev
+
     infecho "Chrooting with qemu into rootfs..."
     chroot rootfs qemu-aarch64-static /bin/bash /root/all.sh
     
+    infecho "Unmounting your /dev from the rootfs..."
+    sleep 3
+    umount rootfs/dev
+
     infecho "Unmounting rootfs..."
     sleep 3
     umount $PP_PARTB

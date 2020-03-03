@@ -4,7 +4,7 @@ set -e
 source .env
 
 echo "This may fail! This is because it is set to download a file that is too old."
-echo "Please visit https://dl.fedoraproject.org/pub/fedora-secondary/development/rawhide/Workstation/aarch64/images/ and update the file name in .env with the new file name on that website."
+echo "Please visit https://dl.fedoraproject.org/pub/fedora-secondary/development/rawhide/Spins/aarch64/images/ and update the file name in .env with the new file name on that website."
 
 echo "This script will download a few GB of Fedora and a few MB of Kernel into the current directory."
 echo "Look inside the script if you would rather download manually."
@@ -18,6 +18,6 @@ then
     tar xf pp.tar.gz
 
     # Download fedora
-    wget https://dl.fedoraproject.org/pub/fedora-secondary/development/rawhide/Workstation/aarch64/images/$FEDORA_RAW_FILE -O rawhide.raw.xz
+    wget https://dl.fedoraproject.org/pub/fedora-secondary/development/rawhide/Spins/aarch64/images/$FEDORA_RAW_FILE -O rawhide.raw.xz
     xz --decompress rawhide.raw.xz
 fi
