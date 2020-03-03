@@ -25,5 +25,6 @@ infecho "Installing recommended packages..."
 dnf install feedbackd phoc phosh squeekboard gdm ModemManager
 
 infecho "Enabling graphical boot and GDM..."
+systemctl disable initial-setup.service
 systemctl enable gdm
-systemctl enable graphical.target
+systemctl set-default graphical.target
