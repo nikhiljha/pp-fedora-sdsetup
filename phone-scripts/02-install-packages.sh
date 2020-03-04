@@ -22,7 +22,7 @@ infecho "Enabling COPR repository..."
 dnf copr enable njha/mobile
 
 infecho "Installing recommended packages..."
-dnf install feedbackd phoc phosh squeekboard gdm ModemManager
+dnf install feedbackd phoc phosh squeekboard gdm ModemManager gnome-terminal
 
 infecho "Enabling graphical boot and GDM..."
 systemctl disable initial-setup.service
