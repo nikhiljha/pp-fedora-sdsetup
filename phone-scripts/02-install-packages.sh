@@ -28,3 +28,6 @@ infecho "Enabling graphical boot and GDM..."
 systemctl disable initial-setup.service
 systemctl enable gdm
 systemctl set-default graphical.target
+
+infecho "Upgrading packages..."
+dnf update --exclude="kernel"
