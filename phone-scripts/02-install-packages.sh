@@ -30,4 +30,4 @@ systemctl enable gdm
 systemctl set-default graphical.target
 
 infecho "Upgrading packages..."
-dnf update --exclude="kernel"
+dnf update --exclude="kernel kernel-core kernel-modules"
