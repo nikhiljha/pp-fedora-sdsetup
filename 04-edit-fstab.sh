@@ -40,6 +40,9 @@ then
     infecho "Fixing /etc/fstab..."
     cat files/fstab > rootfs/etc/fstab
 
+    infecho "Disabling kernel updates..."
+    cat files/dnf.conf > rootfs/etc/dnf/dnf.conf
+
     infecho "Unmounting root file system..."
     sleep 3
     umount $PP_PARTB
