@@ -22,7 +22,7 @@ infecho "Enabling COPR repository..."
 dnf copr enable njha/mobile
 
 infecho "Installing recommended packages..."
-dnf install feedbackd phoc phosh squeekboard gdm ModemManager gnome-terminal rtl8723cs-firmware
+dnf install feedbackd phoc phosh squeekboard gdm ModemManager gnome-terminal rtl8723cs-firmware f2fs-tools chatty calls carbons purple-mm-sms pinephone-helpers evolution-data-server
 
 infecho "Enabling graphical boot and GDM..."
 systemctl disable initial-setup.service
