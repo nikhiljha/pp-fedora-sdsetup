@@ -43,6 +43,9 @@ then
     infecho "Disabling kernel updates..."
     cat files/dnf.conf > rootfs/etc/dnf/dnf.conf
 
+    infecho "Tweaking gschemas..."
+    cat files/90_pinephone.gschema.override > rootfs/usr/share/glib-2.0/schemas/files/90_pinephone.gschema.override
+
     infecho "Unmounting root file system..."
     sleep 3
     umount $PP_PARTB
