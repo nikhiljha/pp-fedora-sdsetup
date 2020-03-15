@@ -44,6 +44,8 @@ then
     cat files/dnf.conf > rootfs/etc/dnf/dnf.conf
 
     infecho "Tweaking gschemas..."
+    mkdir -p rootfs/usr/share/glib-2.0/schemas/files/
+    touch rootfs/usr/share/glib-2.0/schemas/files/90_pinephone.gschema.override
     cat files/90_pinephone.gschema.override > rootfs/usr/share/glib-2.0/schemas/files/90_pinephone.gschema.override
 
     infecho "Unmounting root file system..."
