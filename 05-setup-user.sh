@@ -47,6 +47,9 @@ then
 
     infecho "Chrooting with qemu into rootfs..."
     chroot rootfs qemu-aarch64-static /bin/bash /root/all.sh
+
+    infecho "KILLING ALL QEMU PROCESSES, MAKE SURE YOU HAVE NO MORE RUNNING!"
+    killall -9 /usr/bin/qemu-aarch64-static
     
     infecho "Unmounting your /dev from the rootfs..."
     sleep 3
