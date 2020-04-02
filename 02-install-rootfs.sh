@@ -16,11 +16,6 @@ errecho () {
     exit 1
 }
 
-# Ask for env vars...
-infecho "The env vars that will be used in this script..."
-infecho "FEDORA_RAW_FILE = $FEDORA_RAW_FILE"
-echo
-
 # Automatic Preflight Checks
 if [[ $EUID -ne 0 ]]; then
     errecho "This script must be run as root!" 
