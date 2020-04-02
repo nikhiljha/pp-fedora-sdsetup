@@ -16,7 +16,7 @@ This is a **barely tested** collection of scripts written by someone who has nev
 
 ## Usage
 
-1. Edit `.env` with your own variables. It is especially important to update the Rawhide filename, as that is updated on Fedora's end daily.
+1. Edit `.env` with your own variables.
 2. Run `bash download-files.sh` then `sudo bash all.sh`. Verify the information presented whenever it asks you to confirm.
 
 ## Tips
