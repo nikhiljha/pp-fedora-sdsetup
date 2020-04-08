@@ -2,6 +2,9 @@
 sleep-inactive-battery-type='nothing'
 sleep-inactive-ac-type='nothing'
 
+[org.gnome.desktop.wm.preferences]
+button-layout=''
+
 [org.nemo.window-state]
 start-with-sidebar=false
 
