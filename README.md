@@ -10,6 +10,7 @@ This is a **barely tested** collection of scripts written by someone who has nev
 - wget
 - xz
 - f2fs-tools (for mkfs.f2fs)
+- dosfstools (for mkfs.vfat)
 - rsync
 - uboot-tools (for mkimage)
 - qemu-user-static (for qemu-aarch64-static)
