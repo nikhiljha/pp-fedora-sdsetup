@@ -40,8 +40,8 @@ then
     infecho "Changing directory..."
     cd pp-5.6
 
-    infecho "Generating boot.scr..."
-    mkimage -A arm64 -T script -C none -d boot.cmd boot.scr
+    # infecho "Generating boot.scr..."
+    # mkimage -A arm64 -T script -C none -d boot.cmd boot.scr
 
     infecho "Writing bootloader..."
     dd if=uboot.bin of=$PP_IMAGE bs=1024 seek=8
@@ -56,7 +56,7 @@ then
     mount $PP_PARTB rootfs
 
     infecho "Copying boot.scr board.itb..."
-    cp pp-5.6/boot.scr bootfs/
+    cp files/boot.scr bootfs/
     cp pp-5.6/board.itb bootfs/
 
     infecho "Installing kernel modules..."
