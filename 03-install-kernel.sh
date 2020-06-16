@@ -37,11 +37,7 @@ read -p "Continue? [y/N] " -n 1 -r
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
-    infecho "Changing directory..."
-    cd pp-5.6
-
-    # infecho "Generating boot.scr..."
-    # mkimage -A arm64 -T script -C none -d boot.cmd boot.scr
+    cd uboot
 
     infecho "Writing bootloader..."
     dd if=uboot.bin of=$PP_IMAGE bs=1024 seek=8
@@ -51,20 +47,12 @@ then
 
     infecho "Mounting SD card partitions..."
     mkdir -p bootfs
-    mkdir -p rootfs
     mount $PP_PARTA bootfs
-    mount $PP_PARTB rootfs
 
-    infecho "Copying boot.scr board.itb..."
+    infecho "Copying boot.scr..."
     cp files/boot.scr bootfs/
-    cp pp-5.6/board.itb bootfs/
-
-    infecho "Installing kernel modules..."
-    rsync -a --progress pp-5.6/modules/lib/modules/* rootfs/lib/modules/
 
     infecho "Unmounting SD card partitions..."
     umount $PP_PARTA
-    umount $PP_PARTB
     rmdir bootfs
-    rmdir rootfs
 fi

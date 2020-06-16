@@ -40,8 +40,8 @@ then
     infecho "Fixing /etc/fstab..."
     cat files/fstab > rootfs/etc/fstab
 
-    infecho "Disabling kernel updates..."
-    cat files/dnf.conf > rootfs/etc/dnf/dnf.conf
+    infecho "Ensuring kernel updates won't break everything..."
+    cat files/yum/fedora.repo > /etc/yum.repos.d/fedora.repo
 
     infecho "Tweaking gschemas..."
     mkdir -p rootfs/usr/share/glib-2.0/schemas/files/

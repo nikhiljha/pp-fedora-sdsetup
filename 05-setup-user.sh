@@ -33,9 +33,13 @@ read -p "Continue? [y/N] " -n 1 -r
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
-    infecho "Mounting rootfs..."
+   infecho "Mounting rootfs..."
     mkdir -p rootfs
     mount $PP_PARTB rootfs
+
+    infecho "Mounting bootfs..."
+    mkdir -p rootfs/boot
+    mount $PP_PARTA rootfs/boot
 
     infecho "Installing qemu in rootfs..."
     cp /usr/bin/qemu-aarch64-static rootfs/usr/bin

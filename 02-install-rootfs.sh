@@ -49,6 +49,9 @@ then
     infecho "Copying files..."
     rsync -a --progress imgfs/* rootfs/
 
+    infecho "Deleting contents of /boot..."
+    rm -rf rootfs/boot/*
+
     infecho "Unmounting everything..."
     umount /dev/loop0p3
     losetup -d /dev/loop0
