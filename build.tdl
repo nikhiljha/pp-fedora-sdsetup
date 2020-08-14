@@ -1,0 +1,12 @@
+<template>
+    <name>fedora-rawhide</name>
+    <os>
+        <name>Fedora</name>
+        <version>30</version>
+        <arch>aarch64</arch>
+        <install type='url'>
+            <url>https://dl.fedoraproject.org/pub/fedora/linux/development/rawhide/Everything/aarch64/os/</url>
+        </install>
+        <rootpw>1111</rootpw>
+    </os>
+</template>
