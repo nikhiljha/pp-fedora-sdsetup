@@ -41,7 +41,7 @@ then
     cat files/fstab > rootfs/etc/fstab
 
     infecho "Ensuring kernel updates won't break everything..."
-    cat files/yum/fedora.repo > /etc/yum.repos.d/fedora.repo
+    cat files/yum/fedora.repo > rootfs/etc/yum.repos.d/fedora.repo
 
     infecho "Tweaking gschemas..."
     mkdir -p rootfs/usr/share/glib-2.0/schemas/files/
