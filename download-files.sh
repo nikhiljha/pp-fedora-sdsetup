@@ -11,7 +11,7 @@ echo
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
     # Download kernel
-    wget https://xff.cz/kernels/5.7/pp1.tar.gz -O pp.tar.gz
+    wget https://xff.cz/kernels/5.9/pp.tar.gz -O pp.tar.gz
     tar xf pp.tar.gz
 
     # Get latest rawhide from repo when not set in .env
