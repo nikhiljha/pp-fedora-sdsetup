@@ -3,17 +3,13 @@ set -e
 
 source .env
 
-echo "This script will download a few GB of Fedora and a few MB of Kernel into the current directory."
+echo "This script will download a few GB of Fedora into the current directory. Ensure that you have enough disk space."
 echo "Look inside the script if you would rather download manually."
 echo
 read -p "Continue? [y/N] " -n 1 -r
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
-    # Download kernel
-    wget https://xff.cz/kernels/5.9/pp.tar.gz -O pp.tar.gz
-    tar xf pp.tar.gz
-
     # Get latest rawhide from repo when not set in .env
     if [ -z "$FEDORA_RAW_FILE" ]
     then

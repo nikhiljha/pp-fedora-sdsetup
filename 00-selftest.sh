@@ -28,4 +28,5 @@ command -v qemu-aarch64-static >/dev/null 2>&1 || { echo >&2 "I require qemu-aar
 command -v rsync >/dev/null 2>&1 || { echo >&2 "I require rsync but it's not installed.  Aborting."; exit 1; }
 command -v mkimage >/dev/null 2>&1 || { echo >&2 "I require mkimage but it's not installed.  Aborting."; exit 1; }
 
+infecho "Using loop devices: $ROOT_DEVICE | $ROOT_P1, $ROOT_P2, $ROOT_P3"
 infecho "Selftest complete!"

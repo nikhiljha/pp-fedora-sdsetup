@@ -13,4 +13,7 @@ infecho () {
 infecho "Adding user \"pine\"..."
 adduser pine
 passwd pine
+
+# video is the old group for feedbackd
 usermod -aG wheel,video pine
+

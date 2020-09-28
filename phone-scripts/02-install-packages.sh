@@ -15,11 +15,22 @@ errecho () {
 }
 
 infecho "This adds my COPR repository (njha/mobile) and installs phone related packages."
-infecho "Only functional on Fedora Rawhide."
-infecho "HEAVY WIP, untested"
+infecho "Likely only functional on Fedora Rawhide, but it might work on F33/F32 as well (untested)."
 
 infecho "Enabling COPR repository..."
 dnf copr enable njha/mobile
+
+infecho "Enabling kernel repository..."
+infecho "For more information on this repository, see https://ocf.berkeley.edu/~njha/pinephone/"
+CUSTOMREPO="/etc/yum.repos.d/njha-ocf.repo"
+cat > $CUSTOMREPO <<EOF
+[njha-ocf]
+name=njha's pinephone repository at OCF
+baseurl=https://ocf.berkeley.edu/~njha/pinephone/repo
+enabled=1
+priority=10
+gpgcheck=0
+EOF
 
 infecho "Removing old kernel..."
 infecho "THIS WILL FAIL, DON'T WORRY ITS PROBABLY OK"
@@ -27,7 +38,7 @@ dnf remove kernel || rpm -e --noscripts kernel-core
 dnf install linux-firmware
 
 infecho "Installing kernel..."
-dnf --disablerepo="*" --enablerepo="copr:copr.fedorainfracloud.org:njha:mobile" install kernel
+dnf --disablerepo="*" --enablerepo="njha-ocf" install kernel
 
 infecho "Installing recommended packages..."
 dnf install feedbackd phoc phosh squeekboard gnome-shell ModemManager rtl8723cs-firmware \
@@ -39,9 +50,6 @@ infecho "Enabling graphical boot and lightdm..."
 systemctl disable initial-setup.service
 systemctl enable lightdm
 systemctl set-default graphical.target
-
-infecho "Making COPR higher priority for kernel updates..."
-echo "priority=10" >> /etc/yum.repos.d/_copr\:copr.fedorainfracloud.org\:njha\:mobile.repo
 
 infecho "Upgrading packages..."
 dnf update

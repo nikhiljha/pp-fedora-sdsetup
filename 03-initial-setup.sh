@@ -14,7 +14,8 @@ infecho () {
 
 # Notify User
 infecho "The env vars that will be used in this script..."
-infecho "PP_PARTB = $PP_PARTB"
+infecho "ROOT_P3 = $ROOT_P3"
+infecho "ROOT_P2 = $ROOT_P2"
 echo
 
 # Automatic Preflight Checks
@@ -33,34 +34,29 @@ read -p "Continue? [y/N] " -n 1 -r
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
-   infecho "Mounting rootfs..."
-    mkdir -p rootfs
-    mount $PP_PARTB rootfs
-
-    infecho "Mounting bootfs..."
-    mkdir -p rootfs/boot
-    mount $PP_PARTA rootfs/boot
-
     infecho "Installing qemu in rootfs..."
-    cp /usr/bin/qemu-aarch64-static rootfs/usr/bin
-    cp phone-scripts/* rootfs/root
+    cp /usr/bin/qemu-aarch64-static p3/usr/bin
+    cp phone-scripts/* p3/root
+
+    infecho "Mounting bootfs into rootfs..."
+    umount p2
+    mount $ROOT_P2 p3/boot
 
     infecho "Mounting your /dev into the rootfs..."
     infecho "This is neccesary for dnf to work, because reasons."
-    mount --bind /dev rootfs/dev
+    mount --bind /dev p3/dev
 
     infecho "Chrooting with qemu into rootfs..."
-    chroot rootfs qemu-aarch64-static /bin/bash /root/all.sh
+    chroot p3 qemu-aarch64-static /bin/bash /root/all.sh
 
     infecho "KILLING ALL QEMU PROCESSES, MAKE SURE YOU HAVE NO MORE RUNNING!"
     killall -9 /usr/bin/qemu-aarch64-static
     
     infecho "Unmounting your /dev from the rootfs..."
     sleep 3
-    umount rootfs/dev
+    umount p3/dev
 
-    infecho "Unmounting rootfs..."
-    sleep 3
-    umount $PP_PARTB
-    rmdir rootfs
+    infecho "Unmounting /boot from /root..."
+    umount p3/boot
+    mount $ROOT_P2 p2
 fi

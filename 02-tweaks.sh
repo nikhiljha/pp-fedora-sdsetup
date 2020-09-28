@@ -14,7 +14,7 @@ infecho () {
 
 # Notify User
 infecho "The env vars that will be used in this script..."
-infecho "PP_PARTB = $PP_PARTB"
+infecho "ROOT_P3 = $ROOT_P3"
 echo
 
 # Automatic Preflight Checks
@@ -33,23 +33,15 @@ read -p "Continue? [y/N] " -n 1 -r
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
-    infecho "Mounting root file system..."
-    mkdir -p rootfs
-    mount $PP_PARTB rootfs
-
-    infecho "Fixing /etc/fstab..."
-    cat files/fstab > rootfs/etc/fstab
-
     infecho "Ensuring kernel updates won't break everything..."
-    cat files/yum/fedora.repo > rootfs/etc/yum.repos.d/fedora.repo
+    cat files/yum/fedora.repo > p3/etc/yum.repos.d/fedora.repo
+
+    infecho "Writing your DNS servers to the image..."
+    rm p3/etc/resolv.conf
+    cp /etc/resolv.conf p3/etc/resolv.conf
 
     infecho "Tweaking gschemas..."
-    mkdir -p rootfs/usr/share/glib-2.0/schemas/files/
-    touch rootfs/usr/share/glib-2.0/schemas/files/90_pinephone.gschema.override
-    cat files/90_pinephone.gschema.override > rootfs/usr/share/glib-2.0/schemas/files/90_pinephone.gschema.override
-
-    infecho "Unmounting root file system..."
-    sleep 3
-    umount $PP_PARTB
-    rmdir rootfs
+    mkdir -p p3/usr/share/glib-2.0/schemas/files/
+    touch p3/usr/share/glib-2.0/schemas/files/90_pinephone.gschema.override
+    cat files/90_pinephone.gschema.override > p3/usr/share/glib-2.0/schemas/files/90_pinephone.gschema.override
 fi

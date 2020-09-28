@@ -14,9 +14,7 @@ infecho () {
 
 # Notify User
 infecho "The env vars that will be used in this script..."
-infecho "PP_SD_DEVICE = $PP_IMAGE"
-infecho "PP_PARTA = $PP_PARTA"
-infecho "PP_PARTB = $PP_PARTB"
+infecho "ROOT_DEVICE = $ROOT_DEVICE"
 echo
 
 # Automatic Preflight Checks
@@ -40,19 +38,8 @@ then
     cd uboot
 
     infecho "Writing bootloader..."
-    dd if=uboot.bin of=$PP_IMAGE bs=1024 seek=8
+    dd if=u-boot-sunxi-with-spl.bin of=$ROOT_DEVICE bs=1024 seek=8
 
     infecho "Changing directory back..."
     cd ../
-
-    infecho "Mounting SD card partitions..."
-    mkdir -p bootfs
-    mount $PP_PARTA bootfs
-
-    infecho "Copying boot.scr..."
-    cp files/boot.scr bootfs/
-
-    infecho "Unmounting SD card partitions..."
-    umount $PP_PARTA
-    rmdir bootfs
 fi
