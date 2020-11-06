@@ -40,7 +40,7 @@ then
     cd uboot
 
     infecho "Writing bootloader..."
-    dd if=uboot.bin of=$PP_IMAGE bs=1024 seek=8
+    dd if=u-boot-sunxi-with-spl.bin of=$PP_IMAGE bs=1024 seek=8
 
     infecho "Changing directory back..."
     cd ../

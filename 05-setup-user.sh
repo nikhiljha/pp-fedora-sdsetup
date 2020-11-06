@@ -49,6 +49,9 @@ then
     infecho "This is neccesary for dnf to work, because reasons."
     mount --bind /dev rootfs/dev
 
+    infecho "Copy resolv.conf /etc/tmp-resolv.conf"
+    cp /etc/resolv.conf rootfs/etc/tmp-resolv.conf
+
     infecho "Chrooting with qemu into rootfs..."
     chroot rootfs qemu-aarch64-static /bin/bash /root/all.sh
 

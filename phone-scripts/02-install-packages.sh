@@ -18,6 +18,9 @@ infecho "This adds my COPR repository (njha/mobile) and installs phone related p
 infecho "Only functional on Fedora Rawhide."
 infecho "HEAVY WIP, untested"
 
+infecho "Link temp-resolv.conf"
+ln -sfv /etc/tmp-resolv.conf /etc/resolv.conf
+
 infecho "Enabling COPR repository..."
 dnf copr enable njha/mobile
 
@@ -27,13 +30,13 @@ dnf remove kernel || rpm -e --noscripts kernel-core
 dnf install linux-firmware
 
 infecho "Installing kernel..."
-dnf --disablerepo="*" --enablerepo="copr:copr.fedorainfracloud.org:njha:mobile" install kernel
+dnf --disablerepo="*" --enablerepo="copr:copr.fedorainfracloud.org:njha:mobile" install megi-kernel
 
 infecho "Installing recommended packages..."
 dnf install feedbackd phoc phosh squeekboard gnome-shell ModemManager rtl8723cs-firmware \
     f2fs-tools chatty calls carbons purple-mm-sms pinephone-helpers evolution-data-server \
     f32-backgrounds-gnome kgx epiphany gnome-contacts evolution cheese NetworkManager-wwan \
-    lightdm-mobile-greeter
+    lightdm-mobile-greeter firefox
 
 infecho "Enabling graphical boot and lightdm..."
 systemctl disable initial-setup.service
