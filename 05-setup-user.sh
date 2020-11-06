@@ -3,6 +3,8 @@ set -e
 
 source .env
 
+HOSTARCH=$(uname -m)
+
 echo "================"
 echo "05-setup-user.sh"
 echo "================"
@@ -41,23 +43,31 @@ then
     mkdir -p rootfs/boot
     mount $PP_PARTA rootfs/boot
 
-    infecho "Installing qemu in rootfs..."
-    cp /usr/bin/qemu-aarch64-static rootfs/usr/bin
+    if [[ $HOSTARCH -ne "aarch64" ]]; then
+        infecho "Installing qemu in rootfs..."
+        cp /usr/bin/qemu-aarch64-static rootfs/usr/bin
+    fi
+
     cp phone-scripts/* rootfs/root
 
     infecho "Mounting your /dev into the rootfs..."
     infecho "This is neccesary for dnf to work, because reasons."
     mount --bind /dev rootfs/dev
-
+    
     infecho "Copy resolv.conf /etc/tmp-resolv.conf"
     cp /etc/resolv.conf rootfs/etc/tmp-resolv.conf
 
-    infecho "Chrooting with qemu into rootfs..."
-    chroot rootfs qemu-aarch64-static /bin/bash /root/all.sh
+    if [[ $HOSTARCH -ne "aarch64" ]]; then
+        infecho "Chrooting with qemu into rootfs..."
+        chroot rootfs qemu-aarch64-static /bin/bash /root/all.sh
 
-    infecho "KILLING ALL QEMU PROCESSES, MAKE SURE YOU HAVE NO MORE RUNNING!"
-    killall -9 /usr/bin/qemu-aarch64-static
-    
+        infecho "KILLING ALL QEMU PROCESSES, MAKE SURE YOU HAVE NO MORE RUNNING!"
+        killall -9 /usr/bin/qemu-aarch64-static
+    else
+        infecho "Chrooting into rootfs..."
+        chroot rootfs /bin/bash /root/all.sh
+    fi
+
     infecho "Unmounting your /dev from the rootfs..."
     sleep 3
     umount rootfs/dev
