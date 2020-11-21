@@ -6,3 +6,4 @@ bash /root/02-install-packages.sh
 
 echo "Remove temp-resolv.conf"
 rm /etc/tmp-resolv.conf
+rm /etc/resolv.conf
