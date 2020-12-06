@@ -22,15 +22,15 @@ infecho "Link temp-resolv.conf"
 ln -sfv /etc/tmp-resolv.conf /etc/resolv.conf
 
 infecho "Enabling COPR repository..."
-dnf copr enable njha/mobile
+dnf -y copr enable njha/mobile
 
 infecho "Removing old kernel..."
 infecho "THIS WILL FAIL, DON'T WORRY ITS PROBABLY OK"
-dnf remove kernel || rpm -e --noscripts kernel-core
-dnf install linux-firmware
+dnf -y remove kernel || rpm -e --noscripts kernel-core
+dnf -y install linux-firmware
 
 infecho "Installing kernel..."
-dnf --disablerepo="*" --enablerepo="copr:copr.fedorainfracloud.org:njha:mobile" install megi-kernel
+dnf -y --disablerepo="*" --enablerepo="copr:copr.fedorainfracloud.org:njha:mobile" install megi-kernel
 
 infecho "Installing recommended packages..."
 dnf install feedbackd phoc phosh squeekboard gnome-shell ModemManager rtl8723cs-firmware \
@@ -47,4 +47,4 @@ infecho "Making COPR higher priority for kernel updates..."
 echo "priority=10" >> /etc/yum.repos.d/_copr\:copr.fedorainfracloud.org\:njha\:mobile.repo
 
 infecho "Upgrading packages..."
-dnf update
+dnf -y update
