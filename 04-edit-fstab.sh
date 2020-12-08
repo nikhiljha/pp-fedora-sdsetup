@@ -48,6 +48,9 @@ then
     touch rootfs/usr/share/glib-2.0/schemas/files/90_pinephone.gschema.override
     cat files/90_pinephone.gschema.override > rootfs/usr/share/glib-2.0/schemas/files/90_pinephone.gschema.override
 
+    infecho "Setting system chassis..."
+    cat files/machine-info > rootfs/etc/machine-info
+
     infecho "Unmounting root file system..."
     sleep 3
     umount $PP_PARTB
