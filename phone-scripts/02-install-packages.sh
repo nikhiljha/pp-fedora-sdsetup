@@ -33,11 +33,12 @@ infecho "Installing recommended packages..."
 dnf -y install megi-kernel feedbackd phoc phosh squeekboard gnome-shell ModemManager rtl8723cs-firmware \
     f2fs-tools chatty calls carbons purple-mm-sms pinephone-helpers evolution-data-server \
     f33-backgrounds-gnome kgx epiphany gnome-contacts evolution NetworkManager-wwan \
-    lightdm-mobile-greeter firefox nautilus megapixels
+    firefox nautilus megapixels
 
 infecho "Enabling graphical boot and lightdm..."
 systemctl disable initial-setup.service
-systemctl enable lightdm
+systemctl disable gdm
+systemctl enable phosh
 systemctl set-default graphical.target
 
 infecho "Making COPR higher priority for kernel updates..."
